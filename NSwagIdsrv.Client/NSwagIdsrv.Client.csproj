@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        
+        <PackageId>NSwagIdsrv.Client</PackageId>
+        <Version>0.1.0</Version>
+        <Authors>Kirill Amurskiy</Authors>
+        <Company>Amursoft</Company>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="IdentityModel" Version="4.1.0" />
+    </ItemGroup>
+
+</Project>
