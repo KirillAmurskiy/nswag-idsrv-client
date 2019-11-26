@@ -3,6 +3,8 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using IdentityModel.Client;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace NSwagIdsrv.Client
 {
@@ -26,6 +28,17 @@ namespace NSwagIdsrv.Client
             BaseUrl = opts.BusinessServiceUrl;
         }
 
+        protected virtual JsonSerializerSettings GenerateUpdateJsonSerializerSettings(JsonSerializerSettings settings)
+        {
+            settings.Error = HandleDeserializationError;
+            return settings;
+        }
+
+        protected virtual void HandleDeserializationError(object sender, ErrorEventArgs errorArgs)
+        {
+            errorArgs.ErrorContext.Handled = true;
+        }
+        
         protected async Task<HttpClient> CreateHttpClientAsync(CancellationToken ct)
         {
             var httpClient = new HttpClient();
@@ -62,7 +75,15 @@ namespace NSwagIdsrv.Client
                 return;
             }
 
-            disco = await httpClient.GetDiscoveryDocumentAsync(opts.AuthServiceUrl, ct);
+            disco = await httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
+            {
+                Address = opts.AuthServiceUrl,
+                Policy = new DiscoveryPolicy
+                {
+                    ValidateEndpoints = false,
+                    ValidateIssuerName = false
+                }
+            }, ct);
             if (disco.IsError)
             {
                 if (disco.Exception != null)
