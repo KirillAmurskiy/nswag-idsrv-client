@@ -81,7 +81,8 @@ namespace NSwagIdsrv.Client
                 Policy = new DiscoveryPolicy
                 {
                     ValidateEndpoints = false,
-                    ValidateIssuerName = false
+                    ValidateIssuerName = false,
+                    RequireHttps = false
                 }
             }, ct);
             if (disco.IsError)
