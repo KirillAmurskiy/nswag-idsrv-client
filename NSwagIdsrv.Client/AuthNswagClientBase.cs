@@ -20,8 +20,6 @@ namespace NSwagIdsrv.Client
         
         public string BaseUrl { get; }
 
-        protected abstract string GetScope();
-
         protected AuthNswagClientBase(AuthNswagClientOptions opts)
         {
             this.opts = opts;
@@ -104,7 +102,7 @@ namespace NSwagIdsrv.Client
                 UserName = opts.UserName,
                 Password = opts.UserSecret,
 
-                Scope = GetScope()
+                Scope = opts.Scope
             }, ct);
             OnGotToken();
         }

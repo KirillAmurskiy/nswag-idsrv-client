@@ -1,6 +1,6 @@
 namespace NSwagIdsrv.Client
 {
-    public class AuthNswagClientOptions
+    public abstract class AuthNswagClientOptions
     {
         public string BusinessServiceUrl { get; set; }
         
@@ -13,5 +13,7 @@ namespace NSwagIdsrv.Client
         public string UserName { get; set; }
         
         public string UserSecret { get; set; }
+        
+        public abstract string Scope { get; }
     }
 }
