@@ -37,7 +37,7 @@ namespace NSwagIdsrv.Client
             errorArgs.ErrorContext.Handled = true;
         }
         
-        protected async Task<HttpClient> CreateHttpClientAsync(CancellationToken ct)
+        protected virtual async Task<HttpClient> CreateHttpClientAsync(CancellationToken ct)
         {
             var httpClient = new HttpClient();
 
